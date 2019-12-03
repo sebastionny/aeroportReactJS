@@ -1,23 +1,14 @@
 import React from 'react';
-import ButtonApp from './ButtonApp';
+import TableContainer from './TableContainer';
 import Head from './Head';
 
 const ListeVols = props => {
     return(
         <div className="containerListe">
 
-            <Head/>
-
-            <div className="date mt-5">
-                <h2>21:20</h2>
-                <h4>21 / NOV / 2019</h4>
-            </div>
+            <Head title="VOLS"/>
+            <TableContainer/>
             
-            <div>
-                <ButtonApp text="DEMAIN" type="solid"/>
-                <ButtonApp text="AUJOURD’HUI" type="line"/>
-            </div>
-
         </div>
     
     )

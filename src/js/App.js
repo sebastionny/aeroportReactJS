@@ -10,12 +10,12 @@ function App() {
   return (
 
     <div className="App">
-        <Container fluid={true} >
+        <Container fluid={false} >
           <Row>
-            <Col sm={8} >
+            <Col sm={9} >
              <ListeVols/> 
             </Col>
-            <Col sm={4}>
+            <Col sm={3}>
                 <Header/>
             </Col>
           </Row>

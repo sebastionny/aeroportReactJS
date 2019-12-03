@@ -8,7 +8,7 @@ const ExpandCell = ({ rowData, dataKey, expandedRowKeys, onChange, ...props }) =
   <Cell {...props}>
     <IconButton
       size="xs"
-      appearance="subtle"
+      appearance="primary"
       onClick={() => {
         onChange(rowData);
       }}
@@ -28,12 +28,54 @@ const ExpandCell = ({ rowData, dataKey, expandedRowKeys, onChange, ...props }) =
 class TableContainer extends React.Component {
   constructor(props) {
     super(props);
+    const data = fakeData.filter((v, i) => i < 14);
     this.state = {
-      data: fakeData,
+      data,
+      addColumn: false,
       expandedRowKeys: []
     };
     this.handleExpanded = this.handleExpanded.bind(this);
+    this.handleSortColumn = this.handleSortColumn.bind(this);
   }
+
+
+  getData() {
+    const { data, sortColumn, sortType } = this.state;
+
+    if (sortColumn && sortType) {
+      return data.sort((a, b) => {
+        let x = a[sortColumn];
+        let y = b[sortColumn];
+        if (typeof x === 'string') {
+          x = x.charCodeAt();
+        }
+        if (typeof y === 'string') {
+          y = y.charCodeAt();
+        }
+        if (sortType === 'asc') {
+          return x - y;
+        } else {
+          return y - x;
+        }
+      });
+    }
+    return data;
+  }
+
+  handleSortColumn(sortColumn, sortType) {
+    this.setState({
+      loading: true
+    });
+
+    setTimeout(() => {
+      this.setState({
+        sortColumn,
+        sortType,
+        loading: false
+      });
+    }, 300);
+  }
+
   handleExpanded(rowData, dataKey) {
     const { expandedRowKeys } = this.state;
 
@@ -60,9 +102,13 @@ class TableContainer extends React.Component {
     return (
       <Table
         height={500}
-        data={data}
+        data={this.getData()}
         rowHeight={32}
         rowKey={rowKey}
+        sortColumn={this.state.sortColumn}
+        sortType={this.state.sortType}
+        onSortColumn={this.handleSortColumn}
+        loading={this.state.loading}
         expandedRowKeys={expandedRowKeys}
         onRowClick={data => {
           console.log(data);
@@ -72,23 +118,23 @@ class TableContainer extends React.Component {
             <div>
               <div
                 style={{
-                  width: 20,
-                  height: 20,
+                  width: 60,
+                  height: 60,
                   float: 'left',
-                  marginRight: 2,
-                  background: '#eee',
+                  marginRight: 10,
+                  background: '#EEE',
                 }}
               >
-                <img src={rowData.avartar} style={{ width: 20 }} />
+                <img src={rowData.avartar} style={{ width: 60 }} />
               </div>
-              <p>{rowData.email}</p>
+              <h4>{rowData.email}</h4>
               <p>{rowData.date}</p>
             </div>
           );
         }}
       >
-        <Column width={30} align="center">
-          <HeaderCell>#</HeaderCell>
+        <Column width={60} fixed sortable>
+          <HeaderCell>TYPE</HeaderCell>
           <ExpandCell
             dataKey="TYPE"
             expandedRowKeys={expandedRowKeys}
@@ -96,17 +142,17 @@ class TableContainer extends React.Component {
           />
         </Column>
 
-        <Column width={80}>
-          <HeaderCell>First Name</HeaderCell>
+        <Column width={80} fixed sortable>
+          <HeaderCell># VOL</HeaderCell>
           <Cell dataKey="firstName" />
         </Column>
 
-        <Column width={130} sortable={true}>
+        <Column width={110} sortable>
           <HeaderCell>Last Name</HeaderCell>
           <Cell dataKey="lastName" />
         </Column>
 
-        <Column width={60}>
+        <Column width={60} sortable >
           <HeaderCell>City</HeaderCell>
           <Cell dataKey="city" />
         </Column>

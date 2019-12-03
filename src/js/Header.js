@@ -7,7 +7,7 @@ const Header = props => {
         <div>
             
             <a href="#" className="logo" >
-            <img src={logo} className="img-fluid mt-3" alt="Aeroport AMS "/>
+                <img src={logo} className="img-fluid mt-3" alt="Aeroport AMS "/>
             </a>
 
             <div className="date mt-5">

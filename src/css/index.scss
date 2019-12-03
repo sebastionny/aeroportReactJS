@@ -4,7 +4,8 @@
 $colorRouge: #ED1250;
 $colorBleu: #042F4B;
 $colorBleuF: rgb(1, 25, 41);
-$colorBlanc: #fff;
+$colorBlanc: #fff; 
+$colorVerd: #b7e886;
 
 $MontserratFont: 'Montserrat Alternates', sans-serif;
 $RajdFont: 'Rajdhani', sans-serif;
@@ -170,10 +171,19 @@ body {
   bottom: 0;
   width: 100%;
   z-index: 4;
-  border-top: 1px solid #f2f2f5;
+  border-top: 1px solid $colorRouge;
   padding: 10px;
-  background: #fff;
+  background: $colorBleuF;
+
+  p:first-child {
+    font-family: $MontserratFont;
+    font-size: 1em;
+  }
+
 }
+
+
+
 .rs-table-hover .rs-table-row:hover .rs-table-cell-group {
   background: #fff;
 }
@@ -246,7 +256,7 @@ body {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: #042f4bd9;
   opacity: 0;
   -webkit-transition: opacity 0.2s ease-in;
   transition: opacity 0.2s ease-in;
@@ -353,16 +363,32 @@ body {
   line-height: 1.66666667;
 }
 .rs-table-cell-header-icon-sort::after {
-  content: '\f0dc';
+  content: '⇵';
   font-style: normal;
   font-family: 'rsuite-icon-font';
 }
+
+.rs-btn-default{
+  background: $colorRouge;
+  padding: 6px;
+  border: 1px solid $colorBleuF;
+  border-radius: 4px;
+}
+
+.rs-btn-primary{
+  background: $colorVerd;
+  padding: 6px;
+  border: 1px solid $colorBleuF;
+  border-radius: 4px;
+}
+
+
 .rs-table-cell-header-icon-sort-asc::after {
-  content: '\f0de';
+  content: '⇵';
   color: #3498ff;
 }
 .rs-table-cell-header-icon-sort-desc::after {
-  content: '\f0dd';
+  content: '⇵';
   color: #3498ff;
 }
 .rs-table-cell-header-sortable .rs-table-cell-content {

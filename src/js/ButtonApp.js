@@ -9,5 +9,4 @@ const ButtonApp = props => {
     
     )
 }
-
 export default ButtonApp;
